@@ -12,9 +12,14 @@ RUN apt-get -y update && apt-get install -y \
   autoconf \
   libtool
 
-RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
+RUN useradd -m alistair && echo "alistair:alistair" | chpasswd && adduser alistair sudo
 RUN sed -i.bkp -e \
       's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
       /etc/sudoers
 
-USER docker
+COPY bashrc /home/alistair/.bashrc
+COPY bash_profile /home/alistair/.bash_profile
+COPY gitconfig /home/alistair/.gitconfig
+COPY install-deps /home/alistair/bin/install-deps
+
+USER alistair

@@ -1,0 +1,4 @@
+#!/bin/sh
+sudo apt-get update
+sudo apt-get install --no-install-recommends \
+  `dpkg-checkbuilddeps 2>&1 | sed 's/dpkg-checkbuilddeps:\serror:\sUnmet build dependencies: //g' | sed 's/[\(][^)]*[\)]//g'`
