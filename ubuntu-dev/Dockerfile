@@ -10,7 +10,9 @@ RUN apt-get -y update && apt-get install -y \
   sudo \
   git \
   autoconf \
-  libtool
+  libtool \
+  vim \
+  devscripts
 
 RUN useradd -m alistair && echo "alistair:alistair" | chpasswd && adduser alistair sudo
 RUN sed -i.bkp -e \
@@ -21,5 +23,7 @@ COPY bashrc /home/alistair/.bashrc
 COPY bash_profile /home/alistair/.bash_profile
 COPY gitconfig /home/alistair/.gitconfig
 COPY install-deps /home/alistair/bin/install-deps
+
+RUN mkdir /work && chown -R alistair:alistair /work
 
 USER alistair
