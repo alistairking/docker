@@ -14,6 +14,8 @@ alias duh='du -csh'
 alias t='date -ur'
 alias utc='date -u'
 
+alias db='debuild -b -us -uc'
+
 PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
