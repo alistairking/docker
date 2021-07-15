@@ -1,8 +1,7 @@
 FROM ubuntu:bionic
 
 RUN apt-get update && \
-  apt-get -y install curl lsb-release sudo && \
-  curl https://pkg.caida.org/os/ubuntu/bootstrap.sh | bash
+  apt-get -y install curl lsb-release sudo
 
 RUN apt-get -y update && apt-get install -y \
   apt-utils \
@@ -12,7 +11,12 @@ RUN apt-get -y update && apt-get install -y \
   autoconf \
   libtool \
   vim \
-  devscripts
+  devscripts \
+  libev-dev
+
+RUN cd /tmp && \
+  curl -sLO https://golang.org/dl/go1.16.3.linux-amd64.tar.gz && \
+  rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
 
 RUN useradd -m alistair && echo "alistair:alistair" | chpasswd && adduser alistair sudo
 RUN sed -i.bkp -e \
